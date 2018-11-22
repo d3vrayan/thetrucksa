@@ -19,22 +19,25 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
-<body>
+<body style="background-image: url('images/thetruck-bck.png');">
 	
 	<!--  -->
-	<div class="simpleslide100">
-		<div class="simpleslide100-item bg-img1" style="background-image: url('images/bg01.jpg');"></div>
-		<div class="simpleslide100-item bg-img1" style="background-image: url('images/bg02.jpg');"></div>
-		<div class="simpleslide100-item bg-img1" style="background-image: url('images/bg03.jpg');"></div>
-	</div>
+	<!-- <div class="simpleslide100"> -->
+		<!-- <div class="simpleslide100-item bg-img1" style="background-image: url('images/thetruck-bck.png');"></div> -->
+		<!-- <div class="simpleslide100-item bg-img1" style="background-image: url('images/bg02.jpg');"></div> -->
+		<!-- <div class="simpleslide100-item bg-img1" style="background-image: url('images/bg03.jpg');"></div> -->
+	<!-- </div> -->
 
 	<div class="size1 overlay1">
 		<!--  -->
 		<div class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
 			<h3 class="l1-txt1 txt-center p-b-25">
-				Coming Soon
+				<img src="images/thetruck-logo.png" style="filter: brightness(20%); -webkit-filter: brightness(20%)" />
 			</h3>
 
+			<p class="m2-txt1 txt-center p-b-48">
+					Coming Soon
+				</p>
 			<p class="m2-txt1 txt-center p-b-48">
 				الموقع تحت الإنشاء
 			</p>
@@ -46,7 +49,7 @@
 				</div>
 
 				<div class="flex-col-c-m size2 bor1 m-l-15 m-r-15 m-b-20">
-					<span class="l2-txt1 p-b-9 hours">17</span>
+					<span class="l2-txt1 p-b-9 hours">11</span>
 					<span class="m2-txt1">ساعة</span>
 				</div>
 
@@ -81,15 +84,79 @@
 	<script src="vendor/countdowntime/moment-timezone-with-data.min.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<script>
+		// var date1 = new Date('2018-11-26');
+		// var currentDate = new Date(Date.now());
+		// console.log("Now: " + currentDate.toISOString());
+		// var days = parseInt((date1 - currentDate) / (1000 * 60 * 60 * 24));
+		// var hours = parseInt((date1 - currentDate) / (1000 * 60 * 60 * 24))
+		// console.log('Target Date: ');
+		function NOW() {
+
+		var date = new Date();
+		var aaaa = date.getUTCFullYear();
+		var gg = date.getUTCDate();
+		var mm = (date.getUTCMonth() + 1);
+
+		if (gg < 10)
+				gg = "0" + gg;
+
+		if (mm < 10)
+				mm = "0" + mm;
+
+		var cur_day = aaaa + "-" + mm + "-" + gg;
+
+		var hours = date.getUTCHours()
+		var minutes = date.getUTCMinutes()
+		var seconds = date.getUTCSeconds();
+
+		if (hours < 10)
+				hours = "0" + hours;
+
+		if (minutes < 10)
+				minutes = "0" + minutes;
+
+		if (seconds < 10)
+				seconds = "0" + seconds;
+
+		return cur_day + " " + hours + ":" + minutes + ":" + seconds;
+
+		}
+
+		console.log(NOW());
+		var now = moment(NOW());
+		var target = moment('2018-12-08 12:00');
+		var duration = moment.duration(target.diff(now));
+		//Get Days and subtract from duration
+		var days = duration.asDays();
+		duration.subtract(moment.duration(days,'days'));
+
+		//Get hours and subtract from duration
+		var hours = duration.hours();
+		duration.subtract(moment.duration(hours,'hours'));
+
+		//Get Minutes and subtract from duration
+		var minutes = duration.minutes();
+		duration.subtract(moment.duration(minutes,'minutes'));
+
+		//Get seconds
+		var seconds = duration.seconds();
+		console.log("Days: ",parseInt(days));
+		console.log("Hours: ",hours);
+		console.log("Minutes: ",minutes);
+		console.log("Seconds: ",seconds);
+
+		var nHour = Math.abs(hours);
+		var nMinute = Math.abs(minutes);
+		var nSecond = Math.abs(seconds);
 		$('.cd100').countdown100({
 			/*Set Endtime here*/
 			/*Endtime must be > current time*/
-			endtimeYear: 0,
-			endtimeMonth: 0,
-			endtimeDate: 17,
-			endtimeHours: 18,
-			endtimeMinutes: 0,
-			endtimeSeconds: 0,
+			endtimeYear: 10,
+			endtimeMonth: 10,
+			endtimeDate: parseInt(days),
+			endtimeHours: nHour,
+			endtimeMinutes: nMinute,
+			endtimeSeconds: nSecond,
 			timeZone: "" 
 			// ex:  timeZone: "America/New_York"
 			//go to " http://momentjs.com/timezone/ " to get timezone
